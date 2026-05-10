@@ -59,8 +59,8 @@ resource "aws_route_table_association" "private" {
 
 # create peer connection between two vpc's
 resource "aws_vpc_peering_connection" "peer" {
-  peer_vpc_id   = var.default_vpc_cidr_block
-  vpc_id        = var.vpc_cidr
+  peer_vpc_id   = var.default_vpc_id
+  vpc_id        = aws_vpc.vpc.id
   auto_accept = true
 }
 
