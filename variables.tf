@@ -9,3 +9,4 @@ variable "availability_zone" {}
 variable "components"{}
 variable "ami" {}
 variable "zone_id"{}
+variable "lb_subnets"{}
