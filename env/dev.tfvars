@@ -6,5 +6,27 @@ default_vpc_id="vpc-02a94ee8944923438"
 default_vpc_cidr_block="172.31.0.0/16"
 default_route_table_id="rtb-0a2e9ff93585c96fd"
 availability_zone = ["us-east-1a","us-east-1b"]
+components = {
+  mongodb = {
+    port = 27017
+    instance_type = "t2.micro"
+
+  }
+#   redis = {
+#     port = 6379
+#     instance_type="t2.micro"
+#   }
+#   mysql = {
+#     port = 3306
+#     instance_type="t2.micro"
+#   }
+#   rabbitmq = {
+#     port = 5672
+#     instance_type="t2.micro"
+#   }
+}
+ami="ami-0220d79f3f480ecf5"
+zone_id="Z08520602FC482APPVUI7"
+
 
 # here availability zone means data center
