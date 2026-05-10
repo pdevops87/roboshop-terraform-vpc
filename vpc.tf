@@ -89,8 +89,9 @@ domain = "vpc"
 
 #  create NAT gateway
 resource "aws_nat_gateway" "nat" {
+  count = var.public_subnets
   allocation_id = aws_eip.eip.id
-  subnet_id     = aws_subnet.private.id
+  subnet_id     = aws_subnet.public.id
   tags = {
     Name = "${var.env}-nat"
   }
