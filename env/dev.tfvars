@@ -12,18 +12,18 @@ components = {
     instance_type = "t2.micro"
 
   }
-#   redis = {
-#     port = 6379
-#     instance_type="t2.micro"
-#   }
-#   mysql = {
-#     port = 3306
-#     instance_type="t2.micro"
-#   }
-#   rabbitmq = {
-#     port = 5672
-#     instance_type="t2.micro"
-#   }
+  redis = {
+    port = 6379
+    instance_type="t2.micro"
+  }
+  mysql = {
+    port = 3306
+    instance_type="t2.micro"
+  }
+  rabbitmq = {
+    port = 5672
+    instance_type="t2.micro"
+  }
 }
 ami="ami-0220d79f3f480ecf5"
 zone_id="Z08520602FC482APPVUI7"
