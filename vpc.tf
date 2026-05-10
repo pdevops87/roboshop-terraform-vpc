@@ -112,7 +112,7 @@ resource "aws_route" "nat_private" {
 }
 
 # edit routes for default
-resource "aws_route" "default_vpc_peer" {
+resource "aws_route" "vpc_peer" {
   route_table_id = var.default_route_table_id
   destination_cidr_block = var.vpc_cidr
   vpc_peering_connection_id = aws_vpc_peering_connection.peer.id
