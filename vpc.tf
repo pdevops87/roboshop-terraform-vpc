@@ -99,7 +99,7 @@ resource "aws_nat_gateway" "nat" {
 
 # add NAT to private subnets in route table(routes)
 resource "aws_route" "private_vpc_peer" {
-  count = length(var.private_subnets)
+  count                     = length(var.private_subnets)
   route_table_id            = aws_route_table.private[count.index].id
   destination_cidr_block    = var.default_vpc_cidr_block
   #   construct peer (add in private routes)
@@ -107,9 +107,9 @@ resource "aws_route" "private_vpc_peer" {
 }
 
 resource "aws_route" "default_vpc_peer" {
-  count = length(var.private_subnets)
+
   route_table_id = var.default_route_table_id
-  destination_cidr_block =var.private_subnets[count.index]
+  destination_cidr_block = var.vpc_cidr
   vpc_peering_connection_id = aws_vpc_peering_connection.peer.id
 }
 
