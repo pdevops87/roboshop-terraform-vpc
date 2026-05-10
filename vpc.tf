@@ -81,7 +81,7 @@ resource "aws_route" "public" {
 
 # create eip
 resource "aws_eip" "eip"{
-domain = "VPC"
+domain = "vpc"
   tags = {
     Name = "${var.env}-eip"
   }
