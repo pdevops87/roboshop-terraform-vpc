@@ -18,7 +18,7 @@ resource "aws_subnet" "public" {
 }
 
 resource "aws_subnet" "private" {
-  count = var.private_subnets
+  count = length(var.private_subnets)
   vpc_id     = aws_vpc.vpc.id
   cidr_block = var.private_subnets
   tags = {
@@ -37,7 +37,7 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table" "private" {
-  count = var.private_subnets
+  count = length(var.private_subnets)
   vpc_id = aws_vpc.vpc.id
   tags = {
     Name = "${var.env}-private-rtable-${count.index}"
@@ -52,7 +52,7 @@ resource "aws_route_table_association" "public" {
 }
 
 resource "aws_route_table_association" "private" {
-  count = var.private_subnets
+  count = length(var.private_subnets)
   subnet_id      = aws_subnet.private[count.index].id
   route_table_id = aws_route_table.private[count.index].id
 }
@@ -89,7 +89,6 @@ domain = "vpc"
 
 #  create NAT gateway
 resource "aws_nat_gateway" "nat" {
-  count = var.public_subnets
   allocation_id = aws_eip.eip.id
   subnet_id     = aws_subnet.public.id
   tags = {
@@ -99,7 +98,7 @@ resource "aws_nat_gateway" "nat" {
 
 # add NAT to private subnets in route table(routes)
 resource "aws_route" "private" {
-  count = var.private_subnets
+  count = length(var.private_subnets)
   route_table_id            = aws_route_table.private[count.index].id
   destination_cidr_block    = "0.0.0.0/0"
   nat_gateway_id = aws_nat_gateway.nat[count.index].id
