@@ -101,7 +101,8 @@ resource "aws_route" "private" {
   count = length(var.private_subnets)
   route_table_id            = aws_route_table.private[count.index].id
   destination_cidr_block    = var.default_vpc_cidr_block
-  #   construct peer (add in private routes)
+  nat_gateway_id = aws_nat_gateway.nat.id
+#   construct peer (add in private routes)
   vpc_peering_connection_id = aws_vpc_peering_connection.peer.id
 }
 
