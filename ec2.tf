@@ -6,9 +6,9 @@ resource "aws_instance" "instance" {
   subnet_id = aws_subnet.private[0].id
   security_groups = [aws_security_group.sg[each.key].id]
 #   to stop recreating an instance whenever there are any update/changes
-  lifecycle {
-    prevent_destroy = true
-  }
+#   lifecycle {
+#     prevent_destroy = true
+#   }
   tags = {
     Name = each.key
   }
