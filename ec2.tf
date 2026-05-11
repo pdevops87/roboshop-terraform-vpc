@@ -1,5 +1,6 @@
 resource "aws_instance" "instance" {
   for_each = var.components
+  depends_on = [aws_vpc.vpc,aws_security_group.sg]
   ami           = var.ami
   instance_type = each.value["instance_type"]
   subnet_id = aws_subnet.private[0].id
