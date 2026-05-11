@@ -122,38 +122,38 @@ resource "aws_route" "nat_private" {
 
 # lb
 
-# resource "aws_subnet" "lb" {
-#   vpc_id     = aws_vpc.vpc.id
-#   cidr_block = var.lb_subnets
-#   tags = {
-#     Name = "${var.env}-public-sub"
-#   }
-# }
-
+resource "aws_subnet" "lb" {
+  vpc_id     = aws_vpc.vpc.id
+  cidr_block = var.lb_subnets
+  tags = {
+    Name = "${var.env}-public-sub"
+  }
+}
+#
 # create route table lb
 
-# resource "aws_route_table" "lb" {
-#   count = length(var.lb_subnets)
-#   vpc_id = aws_vpc.vpc.id
-#   tags = {
-#     Name = "${var.env}-lb-rtable-${count.index}"
-#   }
-# }
+resource "aws_route_table" "lb" {
+  count = length(var.lb_subnets)
+  vpc_id = aws_vpc.vpc.id
+  tags = {
+    Name = "${var.env}-lb-rtable-${count.index}"
+  }
+}
+
+# associate lb subnets to route table lb
+resource "aws_route_table_association" "lb" {
+  count = length(var.lb_subnets)
+  subnet_id      = aws_subnet.lb[count.index].id
+  route_table_id = aws_route_table.lb[count.index].id
+}
+
 #
-# # associate lb subnets to route table lb
-# resource "aws_route_table_association" "lb" {
-#   count = length(var.lb_subnets)
-#   subnet_id      = aws_subnet.lb[count.index].id
-#   route_table_id = aws_route_table.lb[count.index].id
-# }
-#
-# #
-# resource "aws_route" "lb" {
-#   count = var.lb_subnets
-#   route_table_id            = aws_route_table.lb[count.index].id
-#   destination_cidr_block    = "0.0.0.0/0"
-#   gateway_id = aws_internet_gateway.igw.id
-# }
+resource "aws_route" "lb" {
+  count                     = length(var.lb_subnets)
+  route_table_id            = aws_route_table.lb[count.index].id
+  destination_cidr_block    = "0.0.0.0/0"
+  gateway_id                = aws_internet_gateway.igw.id
+}
 
 
 

@@ -8,6 +8,7 @@ default_route_table_id="rtb-0a2e9ff93585c96fd"
 availability_zone = ["us-east-1a","us-east-1b"]
 components = {
   mongodb = {
+    ssh_port=22
     port = 27017
     instance_type = "t3.micro"
 

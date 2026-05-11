@@ -30,11 +30,13 @@ resource "null_resource" "provisioner" {
     aws_route53_record.record
   ]
   triggers = {
-    timestamp = timestamp()
+#     timestamp = timestamp()
     instance_id = aws_instance.instance[each.key].id
   }
 
   provisioner "remote-exec" {
+#     if provisioner fails resource should not replaced
+    on_failure = continue
     connection {
       type     = "ssh"
       user     = "ec2-user"

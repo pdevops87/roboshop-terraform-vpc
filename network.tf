@@ -15,8 +15,8 @@ resource "aws_security_group" "sg" {
     cidr_blocks = var.private_subnets
   }
   ingress {
-    from_port = 22
-    to_port = 22
+    from_port = each.value["ssh_port"]
+    to_port = each.value["ssh_port"]
     protocol = "TCP"
     cidr_blocks = [var.bastion_node]
   }
