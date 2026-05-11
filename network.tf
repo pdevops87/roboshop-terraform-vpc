@@ -14,6 +14,12 @@ resource "aws_security_group" "sg" {
     protocol = "TCP"
     cidr_blocks = var.private_subnets
   }
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "TCP"
+    cidr_blocks = [var.bastion_node]
+  }
   tags = {
     Name = "${var.env}-${each.key}-sg"
   }

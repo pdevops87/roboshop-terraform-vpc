@@ -10,3 +10,4 @@ variable "components"{}
 variable "ami" {}
 variable "zone_id"{}
 variable "lb_subnets"{}
+variable "bastion_node"{}
